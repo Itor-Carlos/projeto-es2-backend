@@ -40,3 +40,11 @@ export const Cliente = database.define("Cliente", {
   schema: process.env.DB_SCHEMA,
   timestamps: false
 });
+
+Cliente.findByEmail = async function(email) {
+  return await this.findOne({ where: { email } });
+};
+
+Cliente.findByDocumento = async function(documento) {
+  return await this.findOne({ where: { documento } });
+};

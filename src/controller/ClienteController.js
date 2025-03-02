@@ -1,4 +1,9 @@
+import { ClienteEndereco } from "../model/ClienteEnderecoModel.js";
+import { Cliente } from "../model/ClienteModel.js";
+import { Endereco } from "../model/EnderecoModel.js";
+import ClienteEnderecoService from "../service/ClienteEnderecoService.js";
 import ClienteService from "../service/ClienteService.js";
+import { validateModel } from "../utils/validation.js";
 
 class ClienteController{
     async findAll(request, response){
@@ -21,6 +26,25 @@ class ClienteController{
         catch(error){
             response.status(400).json({
                "message": error.message
+            });
+        }
+    }
+
+    async create(request, response){
+        try{
+            const {cliente, endereco} = request.body;
+            const createdEndereco = await Endereco.create(endereco);
+            const createdCliente = await ClienteService.create(cliente);
+            const createdClienteEndereco = await ClienteEnderecoService.create({
+                idcliente: createdCliente.idcliente,
+                idendereco: createdEndereco.idendereco
+            })
+
+            return response.status(201).json({createdCliente, createdEndereco, createdClienteEndereco});
+        }
+        catch(error){
+            response.status(400).json({
+                "message": error.message
             });
         }
     }
