@@ -7,6 +7,10 @@ export const validateModel = (schema, schemaFields) => {
     .map(([field]) => field);
 
     const missingFields = requiredFields.filter(field => !(field in schemaFields));
+    if(missingFields.length>0){
+        throw new Error("Campos obrigatórios não informados: " + missingFields.join(", "));
+    }
+
     return missingFields;
 }
 
