@@ -9,6 +9,21 @@ class ClienteController{
             response.status(500).json({ message: error.message });
         }
     }
+
+    async delete(request, response){
+        try{
+            const {id} = request.params;
+            await ClienteService.delete(id);
+            return response.status(200).json({
+                "message": "Cliente deletado com sucesso."
+            });
+        }
+        catch(error){
+            response.status(400).json({
+               "message": error.message
+            });
+        }
+    }
 }
 
 
