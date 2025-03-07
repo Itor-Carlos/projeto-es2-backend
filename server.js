@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import { database } from './database.js';
 import ClienteController from './src/controller/ClienteController.js';
 import clienteRoutes from './src/routes/clienteRoutes.js';
+import areaRoutes from './src/routes/areaRoutes.js';
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(bodyParser.json())
 
 app.use('/clientes', clienteRoutes)
+app.use('/areas', areaRoutes)
 
 
 const PORT = process.env.PORT_APP || 3306;
