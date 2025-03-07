@@ -7,6 +7,7 @@ import { database } from './database.js';
 import ClienteController from './src/controller/ClienteController.js';
 import clienteRoutes from './src/routes/clienteRoutes.js';
 import areaRoutes from './src/routes/areaRoutes.js';
+import graoRoutes from './src/routes/graoRoutes.js';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(bodyParser.json())
 
 app.use('/clientes', clienteRoutes)
 app.use('/areas', areaRoutes)
+app.use('/graos', graoRoutes)
 
 
 const PORT = process.env.PORT_APP || 3306;
