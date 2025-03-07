@@ -32,7 +32,7 @@ export const Cliente = database.define("Cliente", {
     allowNull: false,
   },
   empresa: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false,
   },
 }, {
