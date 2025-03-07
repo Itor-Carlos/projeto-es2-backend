@@ -4,6 +4,10 @@ class AreaService {
     async findAll(){
         return await Area.findAll();
     }
+
+    async delete(id){
+        return await Area.destroy({ where: { idarea: id } });
+    }
 }
 
 
