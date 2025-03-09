@@ -2,7 +2,9 @@ import AreaService from "../service/AreaService.js";
 
 class AreaController{
     async findAll(request,response){
-        return response.status(200).json(await AreaService.findAll());
+        const page = parseInt(request.query.page) || 1;
+        const pageSize = parseInt(request.query.pageSize) || 10;
+        return response.status(200).json(await AreaService.findAll(page, pageSize));
     }
 
     async delete(request, response){

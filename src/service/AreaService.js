@@ -2,8 +2,11 @@ import { Area } from "../model/AreaModel.js";
 import { validateModel } from "../utils/validation.js";
 
 class AreaService {
-    async findAll(){
-        return await Area.findAll();
+    async findAll(page = 1, pageSize = 10){
+        return await Area.findAndCountAll({
+            limit: pageSize,
+            offset: (page - 1) * pageSize
+        });
     }
 
     async delete(id){
