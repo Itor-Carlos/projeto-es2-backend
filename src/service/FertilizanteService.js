@@ -4,8 +4,11 @@ import { validateModel } from "../utils/validation.js";
 import { validateDocumento, validateEmail } from "../utils/validation.js";
 
 class FertilizanteService {
-    async findAll() {
-        return (await Fertilizante.findAll()).map(fertilizante => fertilizante['dataValues']);
+    async findAll(page, pageSize) {
+        return await Fertilizante.findAndCountAll({
+            limit: pageSize,
+            offset: (page - 1) * pageSize,
+        });
     }
 
     async delete(id) {
