@@ -2,8 +2,11 @@ import { Grao } from "../model/GraoModel.js";
 import { validateModel } from "../utils/validation.js";
 
 class GraoService{
-    async findAll(){
-        return await Grao.findAll();
+    async findAll(page, pageSize){
+        return await Grao.findAndCountAll({
+            limit: pageSize,
+            offset: (page - 1) * pageSize
+        });
     }
 
     async delete(id){

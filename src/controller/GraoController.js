@@ -2,7 +2,10 @@ import GraoService from "../service/GraoService.js";
 
 class GraoController{
     async findAll(request,response){
-        return response.status(200).json(await GraoService.findAll());
+        const page = parseInt(request.query.page) || 1;
+        const pageSize = parseInt(request.query.pageSize) || 10;
+        const graos = await GraoService.findAll(page, pageSize);
+        return response.status(200).json(graos);
     }
     
     async delete(request, response){
