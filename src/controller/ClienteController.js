@@ -8,7 +8,10 @@ import { validateModel } from "../utils/validation.js";
 class ClienteController{
     async findAll(request, response){
         try {
-            const clientes = await ClienteService.findAll();
+            const page = parseInt(request.query.page) || 1;
+            const pageSize = parseInt(request.query.pageSize) || 10;
+
+            const clientes = await ClienteService.findAll(page, pageSize);
             response.status(200).json(clientes);
         } catch (error) {
             response.status(500).json({ message: error.message });

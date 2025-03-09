@@ -3,8 +3,11 @@ import { validateModel } from "../utils/validation.js";
 import { validateDocumento, validateEmail } from "../utils/validation.js";
 
 class ClienteService {
-    async findAll() {
-        return (await Cliente.findAll()).map(cliente => cliente['dataValues']);
+    async findAll(page, pageSize) {
+        return await Cliente.findAndCountAll({
+            limit: pageSize,
+            offset: (page - 1) * pageSize
+        });
     }
 
     async delete(id) {
