@@ -2,6 +2,10 @@ import { Area } from "../model/AreaModel.js";
 import { validateModel } from "../utils/validation.js";
 
 class AreaService {
+    async findById(id){
+        return await Area.findByPk(id);
+    }
+    
     async findAll(page = 1, pageSize = 10){
         return await Area.findAndCountAll({
             limit: pageSize,

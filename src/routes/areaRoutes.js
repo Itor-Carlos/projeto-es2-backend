@@ -5,6 +5,7 @@ export const routerArea = Router();
 
 routerArea.post('/', AreaController.create);
 routerArea.get('/', AreaController.findAll);
+routerArea.get('/:id', AreaController.findById);
 routerArea.delete('/:id', AreaController.delete);
 routerArea.put('/:id', AreaController.update);
 

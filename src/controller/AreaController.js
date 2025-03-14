@@ -1,9 +1,22 @@
 import AreaService from "../service/AreaService.js";
 
 class AreaController{
+
+    async findById(request,response){
+        const {id} = request.params;
+        console.log(id)
+        if(!id){
+            return response.status(400).json({
+                "message": "O id da área é obrigatório."
+            });
+        }
+        return response.status(200).json(await AreaService.findById(id));
+    }
+
     async findAll(request,response){
         const page = parseInt(request.query.page) || 1;
         const pageSize = parseInt(request.query.pageSize) || 10;
+
         return response.status(200).json(await AreaService.findAll(page, pageSize));
     }
 
