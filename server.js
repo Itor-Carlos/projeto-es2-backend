@@ -9,6 +9,7 @@ import clienteRoutes from './src/routes/clienteRoutes.js';
 import areaRoutes from './src/routes/areaRoutes.js';
 import graoRoutes from './src/routes/graoRoutes.js';
 import fertilizanteRoutes from './src/routes/fertilizanteRoutes.js';
+import funcionarioRoutes from './src/routes/funcionarioRoutes.js';
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use('/clientes', clienteRoutes)
 app.use('/areas', areaRoutes)
 app.use('/graos', graoRoutes)
 app.use('/fertilizantes', fertilizanteRoutes)
+app.use('/funcionarios', funcionarioRoutes)
 
 
 const PORT = process.env.PORT_APP || 3306;
