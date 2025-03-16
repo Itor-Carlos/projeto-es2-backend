@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import { database } from "../../database.js";
 import { config } from "dotenv";
+import { BaseModelMethods } from "./BaseModelMethods.js";
 
 config()
 export const Fornecedor = database.define("Fornecedor", {
@@ -41,10 +42,4 @@ export const Fornecedor = database.define("Fornecedor", {
   timestamps: false
 });
 
-Fornecedor.findByEmail = async function(email) {
-  return await this.findOne({ where: { email } });
-}
-
-Fornecedor.findByDocumento = async function(documento) {
-  return await this.findOne({ where: { documento } });
-}
+Object.assign(Fornecedor, BaseModelMethods);

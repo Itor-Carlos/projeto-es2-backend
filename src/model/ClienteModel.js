@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import { database } from "../../database.js";
 import { config } from "dotenv";
+import { BaseModelMethods } from "./BaseModelMethods.js";
 
 config()
 export const Cliente = database.define("Cliente", {
@@ -41,10 +42,4 @@ export const Cliente = database.define("Cliente", {
   timestamps: false
 });
 
-Cliente.findByEmail = async function(email) {
-  return await this.findOne({ where: { email } });
-};
-
-Cliente.findByDocumento = async function(documento) {
-  return await this.findOne({ where: { documento } });
-};
+Object.assign(Cliente, BaseModelMethods);
