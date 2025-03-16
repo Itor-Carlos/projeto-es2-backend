@@ -15,26 +15,7 @@ class BaseController {
             return response.status(500).json({ message: error.message });
         }
     }
-
-    async delete(request, response) {
-        try {
-            const { id } = request.params;
-            
-            if (!id) {
-                return response.status(400).json({
-                    message: `O id do(a) ${this.modelName} é obrigatório.`
-                });
-            }
-            
-            await this.service.delete(id);
-            return response.status(200).json({
-                message: `${this.modelName} deletado com sucesso.`
-            });
-        } catch (error) {
-            return response.status(400).json({ message: error.message });
-        }
-    }
-
+    
     async create(request, response) {
         try {
             const data = request.body;
@@ -64,6 +45,26 @@ class BaseController {
             return response.status(400).json({ message: error.message });
         }
     }
+    
+    async delete(request, response) {
+        try {
+            const { id } = request.params;
+            
+            if (!id) {
+                return response.status(400).json({
+                    message: `O id do(a) ${this.modelName} é obrigatório.`
+                });
+            }
+            
+            await this.service.delete(id);
+            return response.status(200).json({
+                message: `${this.modelName} deletado com sucesso.`
+            });
+        } catch (error) {
+            return response.status(400).json({ message: error.message });
+        }
+    }
+
 }
 
 export default BaseController;
