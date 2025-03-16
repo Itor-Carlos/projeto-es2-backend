@@ -1,3 +1,5 @@
+import { validateModel, validateEmail, validateDocumento } from "../utils/validation.js";
+
 export class BaseService {
   constructor(Model, idField, options = {}) {
       this.Model = Model;
