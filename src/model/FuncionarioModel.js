@@ -43,4 +43,4 @@ export const Funcionario = database.define("Funcionario", {
   timestamps: false
 });
 
-Object.assign(Fornecedor, BaseModelMethods);
+Object.assign(Funcionario, BaseModelMethods);
