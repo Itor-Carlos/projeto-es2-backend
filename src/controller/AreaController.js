@@ -6,8 +6,7 @@ class AreaController extends BaseController {
         super(AreaService, "área");
     }
 
-    // Método específico para Area que não existe na base
-    async findById(request, response) {
+    findById = async (request, response) => {
         const { id } = request.params;
         if (!id) {
             return response.status(400).json({

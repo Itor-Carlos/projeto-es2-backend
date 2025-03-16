@@ -4,7 +4,7 @@ class BaseController {
         this.modelName = modelName;
     }
 
-    async findAll(request, response) {
+    findAll = async (request, response) => {
         try {
             const page = parseInt(request.query.page) || 1;
             const pageSize = parseInt(request.query.pageSize) || 10;
@@ -16,7 +16,7 @@ class BaseController {
         }
     }
     
-    async create(request, response) {
+    create = async (request, response) => {
         try {
             const data = request.body;
             const created = await this.service.create(data);
@@ -26,7 +26,7 @@ class BaseController {
         }
     }
 
-    async update(request, response) {
+    update = async (request, response) => {
         try {
             const { id } = request.params;
             const data = request.body;
@@ -46,7 +46,7 @@ class BaseController {
         }
     }
     
-    async delete(request, response) {
+    delete = async (request, response) => {
         try {
             const { id } = request.params;
             
@@ -64,7 +64,6 @@ class BaseController {
             return response.status(400).json({ message: error.message });
         }
     }
-
 }
 
 export default BaseController;
