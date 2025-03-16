@@ -1,13 +1,9 @@
 import { FuncionarioEndereco } from "../model/FuncionarioEnderecoModel.js";
-import { validateModel } from "../utils/validation.js";
+import PEnderecoBaseService from "./PEnderecoBaseService.js";
 
-
-class FuncionarioEnderecoService {
-    async create(funcionarioEndereco){
-        validateModel(FuncionarioEndereco, funcionarioEndereco);
-    
-        const createdFuncionarioEndereco = await FuncionarioEndereco.create(funcionarioEndereco);
-        return createdFuncionarioEndereco;
+class FuncionarioEnderecoService extends PEnderecoBaseService {
+    constructor() {
+        super(FuncionarioEndereco);
     }
 }
 
