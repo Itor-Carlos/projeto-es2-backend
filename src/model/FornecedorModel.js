@@ -4,8 +4,8 @@ import { config } from "dotenv";
 import { BaseModelMethods } from "./BaseModelMethods.js";
 
 config()
-export const Cliente = database.define("Cliente", {
-  idcliente: {
+export const Fornecedor = database.define("Fornecedor", {
+  idfornecedor: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
@@ -37,9 +37,9 @@ export const Cliente = database.define("Cliente", {
     allowNull: false,
   },
 }, {
-  tableName: "cliente",
+  tableName: "fornecedor",
   schema: process.env.DB_SCHEMA,
   timestamps: false
 });
 
-Object.assign(Cliente, BaseModelMethods);
+Object.assign(Fornecedor, BaseModelMethods);
