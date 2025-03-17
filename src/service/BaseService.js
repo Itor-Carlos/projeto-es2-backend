@@ -1,4 +1,4 @@
-import { validateModel, validateEmail, validateDocumento } from "../utils/validation.js";
+import { validateCreate, validateUpdate, validateEmail, validateDocumento } from "../utils/validation.js";
 
 export class BaseService {
   constructor(Model, idField, options = {}) {
@@ -28,7 +28,7 @@ export class BaseService {
   }
 
   async create(data) {
-      validateModel(this.Model, data);
+      validateCreate(this.Model, data);
 
       if (this.validateEmailAndDoc) {
           const validEmail = validateEmail(data.email);
@@ -56,7 +56,7 @@ export class BaseService {
   }
 
   async update(id, data) {
-      validateModel(this.Model, {id, ...data});
+      validateUpdate(this.Model, {id, ...data});
       return await this.Model.update(data, { 
           where: { [this.idField]: id } 
       });

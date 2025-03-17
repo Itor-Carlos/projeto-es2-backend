@@ -1,4 +1,4 @@
-import { validateModel } from "../utils/validation.js";
+import { validateCreate } from "../utils/validation.js";
 
 class PEnderecoBaseService {
     constructor(Model) {
@@ -6,7 +6,7 @@ class PEnderecoBaseService {
     }
 
     async create(endereco) {
-        validateModel(this.Model, endereco);
+        validateCreate(this.Model, endereco);
         
         const createdEndereco = await this.Model.create(endereco);
         return createdEndereco;
