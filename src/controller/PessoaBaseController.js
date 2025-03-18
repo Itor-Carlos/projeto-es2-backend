@@ -10,9 +10,10 @@ class PessoaBaseController extends BaseController {
 
     findById = async (request, response) => {
         const { id } = request.params;
+        const { [this.modelName]: entityData } = request.body;
         if (!id) {
             return response.status(400).json({
-                message: "O id da área é obrigatório."
+                message: `O id da(o) ${this.modelName} é obrigatório.`
             });
         }
         return response.status(200).json(await this.service.findById(id));
