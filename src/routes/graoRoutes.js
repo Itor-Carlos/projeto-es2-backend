@@ -5,6 +5,7 @@ export const routerGrao = Router();
 
 routerGrao.post('/', GraoController.create);
 routerGrao.get('/', GraoController.findAll);
+routerGrao.get('/:id', GraoController.findById);
 routerGrao.delete('/:id', GraoController.delete);
 routerGrao.put('/:id', GraoController.update);
 
