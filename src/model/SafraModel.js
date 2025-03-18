@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import { database } from "../../database.js";
 import { config } from "dotenv";
+import { Grao } from "./GraoModel.js";
 
 config()
 export const Safra = database.define("Safra", {
@@ -24,7 +25,7 @@ export const Safra = database.define("Safra", {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: "Grao",
+      model: Grao,
       key: "idgrao"
     }
   }
