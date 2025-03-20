@@ -8,7 +8,11 @@ export class BaseService {
   }
 
   async findById(id) {
-      return await this.Model.findByPk(id);
+    const resultId = await this.Model.findByPk(id);
+    if(!resultId) {
+        return {};
+    }
+    return resultId;
   }
 
   async findAll(page = 1, pageSize = 10) {

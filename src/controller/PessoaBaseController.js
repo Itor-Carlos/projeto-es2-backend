@@ -8,6 +8,17 @@ class PessoaBaseController extends BaseController {
         this.entityIdName = entityIdName;
     }
 
+    findById = async (request, response) => {
+        const { id } = request.params;
+        const { [this.modelName]: entityData } = request.body;
+        if (!id) {
+            return response.status(400).json({
+                message: `O id da(o) ${this.modelName} é obrigatório.`
+            });
+        }
+        return response.status(200).json(await this.service.findById(id));
+    }
+
     create = async (request, response) => {
         try {
             const { endereco, [this.modelName]: entityData } = request.body;
