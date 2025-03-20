@@ -1,5 +1,5 @@
-import { Tarefa } from '../models/Tarefa';
-import { BaseService } from './BaseService';
+import { Tarefa } from '../model/TarefaModel.js';
+import { BaseService } from './BaseService.js';
 
 class TarefaService extends BaseService {
   constructor() {
