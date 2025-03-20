@@ -11,6 +11,7 @@ import graoRoutes from './src/routes/graoRoutes.js';
 import fertilizanteRoutes from './src/routes/fertilizanteRoutes.js';
 import funcionarioRoutes from './src/routes/funcionarioRoutes.js';
 import fornecedorRoutes from './src/routes/fornecedorRoutes.js';
+import tarefaRoutes from './src/routes/tarefaRoutes.js';
 import safraRoutes from './src/routes/safraRoutes.js';
 
 const app = express();
@@ -24,7 +25,9 @@ app.use('/graos', graoRoutes)
 app.use('/fertilizantes', fertilizanteRoutes)
 app.use('/funcionarios', funcionarioRoutes)
 app.use('/fornecedores', fornecedorRoutes)
+app.use('/tarefas', tarefaRoutes)
 app.use('/safras', safraRoutes)
+
 
 
 const PORT = process.env.PORT_APP || 3306;
