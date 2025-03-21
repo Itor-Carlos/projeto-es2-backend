@@ -3,7 +3,7 @@ import { config } from 'dotenv';
 config();
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { database } from './database.js';
+import { database } from './src/database/database.js';
 import ClienteController from './src/controller/ClienteController.js';
 import clienteRoutes from './src/routes/clienteRoutes.js';
 import areaRoutes from './src/routes/areaRoutes.js';
@@ -13,6 +13,7 @@ import funcionarioRoutes from './src/routes/funcionarioRoutes.js';
 import fornecedorRoutes from './src/routes/fornecedorRoutes.js';
 import tarefaRoutes from './src/routes/tarefaRoutes.js';
 import safraRoutes from './src/routes/safraRoutes.js';
+import './src/database/associations.js';
 
 const app = express();
 
