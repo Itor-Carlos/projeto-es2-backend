@@ -7,5 +7,6 @@ routerFornecedor.post('/', FornecedorController.create);
 routerFornecedor.get('/', FornecedorController.findAll);
 routerFornecedor.get('/:id', FornecedorController.findById);
 routerFornecedor.delete('/:id', FornecedorController.delete);
+routerFornecedor.put('/:id', FornecedorController.update); 
 
 export default routerFornecedor;
