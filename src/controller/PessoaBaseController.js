@@ -2,68 +2,93 @@ import BaseController from "./BaseController.js";
 import { Endereco } from "../model/EnderecoModel.js";
 
 class PessoaBaseController extends BaseController {
-    constructor(service, modelName, enderecoService, entityIdName) {
+    constructor(service, modelName, enderecoService, entityIdName, includes = []) {
         super(service, modelName);
         this.enderecoService = enderecoService;
         this.entityIdName = entityIdName;
+        this.includes = [...includes, { model: Endereco, as: "endereco" }];
     }
 
     findById = async (request, response) => {
-        const { id } = request.params;
-        const { [this.modelName]: entityData } = request.body;
-        if (!id) {
-            return response.status(400).json({
-                message: `O id da(o) ${this.modelName} é obrigatório.`
+        try {
+            const { id } = request.params;
+            if (!id) {
+                return response.status(400).json({
+                    message: `O id da(o) ${this.modelName} é obrigatório.`
+                });
+            }
+            
+            const entity = await this.service.findById(id, {
+                include: this.includes
             });
+            
+            if (!entity) {
+                return response.status(404).json({
+                    message: `${this.modelName} não encontrado(a).`
+                });
+            }
+
+            return response.status(200).json(entity);
+        } catch (error) {
+            return response.status(500).json({ message: error.message });
         }
-        return response.status(200).json(await this.service.findById(id));
     }
 
     create = async (request, response) => {
         try {
             const { endereco, [this.modelName]: entityData } = request.body;
 
-            // Validação dos dados obrigatórios
             if (!endereco) {
-                return response.status(400).json({ 
-                    message: "O endereço é obrigatório." 
-                });
+                return response.status(400).json({ message: "O endereço é obrigatório." });
             }
-
             if (!entityData) {
-                return response.status(400).json({ 
-                    message: `Os dados do ${this.modelName} são obrigatórios.` 
-                });
+                return response.status(400).json({ message: `Os dados do ${this.modelName} são obrigatórios.` });
             }
 
-            // Validação dos campos do endereço
             const requiredEnderecoFields = ['cep', 'estado', 'cidade', 'bairro', 'logradouro', 'numero'];
             for (const field of requiredEnderecoFields) {
                 if (!endereco[field]) {
-                    return response.status(400).json({ 
-                        message: `O campo ${field} do endereço é obrigatório.` 
-                    });
+                    return response.status(400).json({ message: `O campo ${field} do endereço é obrigatório.` });
                 }
             }
-            
-            // Cria o endereço
-            const createdEndereco = await Endereco.create(endereco);
-            
-            // Cria a entidade (cliente/fornecedor/funcionario)
-            const createdEntity = await this.service.create(entityData);
-            
-            // Cria a relação entre entidade e endereço
-            const relationData = {
-                [this.entityIdName]: createdEntity[this.entityIdName],
-                idendereco: createdEndereco.idendereco
-            };
-            
-            const createdRelation = await this.enderecoService.create(relationData);
 
+            const createdEndereco = await this.enderecoService.create(endereco);
+            const createdEntity = await this.service.create({
+                ...entityData,
+                idendereco: createdEndereco.idendereco
+            });
+            
             return response.status(201).json({
                 [this.modelName]: createdEntity,
-                endereco: createdEndereco,
-                [`${this.modelName}Endereco`]: createdRelation
+                endereco: createdEndereco
+            });
+        } catch (error) {
+            return response.status(500).json({ message: error.message });
+        }
+    }
+
+    update = (request, response) => {
+        try {
+            const { id } = request.params;
+            const { endereco, [this.modelName]: entityData } = request.body;
+
+            if (!id) {
+                return response.status(400).json({
+                    message: `O id do(a) ${this.modelName} é obrigatório.`
+                });
+            }
+            if (!endereco) {
+                return response.status(400).json({ message: "O endereço é obrigatório." });
+            }
+            if (!entityData) {
+                return response.status(400).json({ message: `Os dados do ${this.modelName} são obrigatórios.` });
+            }
+
+            this.service.update(id, entityData);
+            this.enderecoService.update(entityData.idendereco, endereco);
+            
+            return response.status(200).json({
+                message: "Dados alterados com sucesso"
             });
         } catch (error) {
             return response.status(400).json({ message: error.message });
