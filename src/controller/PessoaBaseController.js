@@ -67,7 +67,7 @@ class PessoaBaseController extends BaseController {
         }
     }
 
-    update = (request, response) => {
+    update = async (request, response) => {
         try {
             const { id } = request.params;
             const { endereco, [this.modelName]: entityData } = request.body;
@@ -84,8 +84,17 @@ class PessoaBaseController extends BaseController {
                 return response.status(400).json({ message: `Os dados do ${this.modelName} são obrigatórios.` });
             }
 
-            this.service.update(id, entityData);
-            this.enderecoService.update(entityData.idendereco, endereco);
+            const getModel =  await this.service.findById(id);
+            if (!getModel) {
+                return response.status(404).json({
+                    message: `${this.modelName} não encontrado(a).`
+                });
+            }
+            
+            const idEndereco = getModel.idendereco;
+
+            await this.service.update(id, entityData);
+            await this.enderecoService.update(idEndereco, endereco);
             
             return response.status(200).json({
                 message: "Dados alterados com sucesso"
