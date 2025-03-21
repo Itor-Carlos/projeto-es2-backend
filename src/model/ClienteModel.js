@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { database } from "../../database.js";
+import { database } from "../database/database.js";
 import { config } from "dotenv";
 import { BaseModelMethods } from "./BaseModelMethods.js";
 
@@ -36,6 +36,10 @@ export const Cliente = database.define("Cliente", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  idendereco: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  }
 }, {
   tableName: "cliente",
   schema: process.env.DB_SCHEMA,
