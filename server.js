@@ -46,5 +46,5 @@ const syncDB = async () => {
 
 app.listen(PORT, async () => {
     syncDB();
-    console.log("Servidor iniciaalizado na em http://localhost:" + PORT);
+    console.log("Servidor inicializado na em http://localhost:" + PORT);
 });

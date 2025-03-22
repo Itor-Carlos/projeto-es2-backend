@@ -15,7 +15,7 @@ export const Pedido = database.define("Pedido", {
         allowNull: false,
     },
     valor: {
-        type: DataTypes.DECIMAL,
+        type: DataTypes.FLOAT,
         allowNull: false,
     },
     status: {
