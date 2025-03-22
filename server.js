@@ -4,7 +4,6 @@ config();
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { database } from './src/database/database.js';
-import ClienteController from './src/controller/ClienteController.js';
 import clienteRoutes from './src/routes/clienteRoutes.js';
 import areaRoutes from './src/routes/areaRoutes.js';
 import graoRoutes from './src/routes/graoRoutes.js';
@@ -14,6 +13,7 @@ import fornecedorRoutes from './src/routes/fornecedorRoutes.js';
 import tarefaRoutes from './src/routes/tarefaRoutes.js';
 import safraRoutes from './src/routes/safraRoutes.js';
 import pedidoRoutes from './src/routes/pedidoRoutes.js';
+import produtoRoutes from './src/routes/produtoRoutes.js';
 import './src/database/associations.js';
 
 const app = express();
@@ -30,6 +30,7 @@ app.use('/fornecedores', fornecedorRoutes)
 app.use('/tarefas', tarefaRoutes)
 app.use('/safras', safraRoutes)
 app.use('/pedidos', pedidoRoutes)
+app.use('/produtos', produtoRoutes)
 
 
 const PORT = process.env.PORT_APP || 3306;
