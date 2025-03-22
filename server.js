@@ -4,7 +4,6 @@ config();
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { database } from './src/database/database.js';
-import ClienteController from './src/controller/ClienteController.js';
 import clienteRoutes from './src/routes/clienteRoutes.js';
 import areaRoutes from './src/routes/areaRoutes.js';
 import graoRoutes from './src/routes/graoRoutes.js';
@@ -13,6 +12,7 @@ import funcionarioRoutes from './src/routes/funcionarioRoutes.js';
 import fornecedorRoutes from './src/routes/fornecedorRoutes.js';
 import tarefaRoutes from './src/routes/tarefaRoutes.js';
 import safraRoutes from './src/routes/safraRoutes.js';
+import produtoRoutes from './src/routes/produtoRoutes.js';
 import './src/database/associations.js';
 
 const app = express();
@@ -28,6 +28,7 @@ app.use('/funcionarios', funcionarioRoutes)
 app.use('/fornecedores', fornecedorRoutes)
 app.use('/tarefas', tarefaRoutes)
 app.use('/safras', safraRoutes)
+app.use('/produtos', produtoRoutes)
 
 
 

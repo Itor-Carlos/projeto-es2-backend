@@ -1,4 +1,4 @@
-import express, {Router} from 'express';
+import {Router} from 'express';
 import GraoController from '../controller/GraoController.js';
 
 export const routerGrao = Router();
