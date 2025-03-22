@@ -13,6 +13,7 @@ import funcionarioRoutes from './src/routes/funcionarioRoutes.js';
 import fornecedorRoutes from './src/routes/fornecedorRoutes.js';
 import tarefaRoutes from './src/routes/tarefaRoutes.js';
 import safraRoutes from './src/routes/safraRoutes.js';
+import pedidoRoutes from './src/routes/pedidoRoutes.js';
 import './src/database/associations.js';
 
 const app = express();
@@ -28,7 +29,7 @@ app.use('/funcionarios', funcionarioRoutes)
 app.use('/fornecedores', fornecedorRoutes)
 app.use('/tarefas', tarefaRoutes)
 app.use('/safras', safraRoutes)
-
+app.use('/pedidos', pedidoRoutes)
 
 
 const PORT = process.env.PORT_APP || 3306;
