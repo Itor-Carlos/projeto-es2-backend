@@ -3,7 +3,7 @@ import { BaseService } from "./BaseService.js";
 
 class FornecedorService extends BaseService {
   constructor() {
-    super(Fornecedor, 'idfornecedor');
+    super(Fornecedor, 'idfornecedor', { validateEmailAndDoc: true, includes: ["endereco"] });
   }
 }
 

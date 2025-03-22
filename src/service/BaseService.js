@@ -5,10 +5,11 @@ export class BaseService {
       this.Model = Model;
       this.idField = idField;
       this.validateEmailAndDoc = options.validateEmailAndDoc || false;
-  }
+      this.includes = options.includes || [];
+   }
 
   async findById(id) {
-    const resultId = await this.Model.findByPk(id);
+    const resultId = await this.Model.findByPk(id, { include: this.includes });
     if(!resultId) {
         return {};
     }
@@ -18,7 +19,8 @@ export class BaseService {
   async findAll(page = 1, pageSize = 10) {
       return await this.Model.findAndCountAll({
           limit: pageSize,
-          offset: (page - 1) * pageSize
+          offset: (page - 1) * pageSize,
+          include: this.includes
       });
   }
 
@@ -45,12 +47,12 @@ export class BaseService {
               throw new Error("Documento inválido.");
           }
 
-          const emailAlredyUsed = await this.Model.findByEmail(data.email);
+          const emailAlredyUsed = await this.Model.findOne({ where: { email: data.email } });
           if(emailAlredyUsed) {
               throw new Error("Email já cadastrado.");
           }  
 
-          const documentoAlredyUsed = await this.Model.findByDocumento(data.documento);
+          const documentoAlredyUsed = await this.Model.findOne({ where: { documento: data.documento } });
           if(documentoAlredyUsed) {
               throw new Error("Documento já cadastrado.");
           }

@@ -1,10 +1,10 @@
 import PessoaBaseController from "./PessoaBaseController.js";
 import FornecedorService from "../service/FornecedorService.js";
-import FornecedorEnderecoService from "../service/FornecedorEnderecoService.js";
+import EnderecoService from "../service/EnderecoService.js";
 
 class FornecedorController extends PessoaBaseController {
     constructor() {
-        super(FornecedorService, "fornecedor", FornecedorEnderecoService, "idfornecedor");
+        super(FornecedorService, "fornecedor", EnderecoService, "idfornecedor");
     }
 }
 

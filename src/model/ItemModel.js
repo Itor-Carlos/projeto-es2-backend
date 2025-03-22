@@ -1,36 +1,38 @@
 import { DataTypes } from "sequelize";
 import { database } from "../database/database.js";
 import { config } from "dotenv";
-import { Grao } from "./GraoModel.js";
+import { Produto } from "./ProdutoModel.js";
+import { Pedido } from "./PedidoModel.js";
 
 config()
-export const Safra = database.define("Safra", {
-  idsafra: {
+export const Item = database.define("Item", {
+  iditem: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  datainicio: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-  datafim: {
-    type: DataTypes.DATE
-  },
-  quantidadeprevista: {
+  quantidade: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  idgrao: {
+  idpedido: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: Grao,
-      key: "idgrao"
+      model: Pedido,
+      key: "idpedido"
+    }
+  },
+  idproduto: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references : {
+      model: Produto,
+      key: "idproduto"
     }
   }
 }, {
-  tableName: "safra",
+  tableName: "item",
   schema: process.env.DB_SCHEMA,
   timestamps: false
 });

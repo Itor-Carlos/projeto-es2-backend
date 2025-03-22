@@ -4,7 +4,7 @@ import { BaseService } from "./BaseService.js";
 
 class FuncionarioService extends BaseService {
     constructor() {
-        super(Funcionario, 'idfuncionario', { validateEmailAndDoc: true });
+        super(Funcionario, 'idfuncionario', { validateEmailAndDoc: true, includes: ["endereco", "tarefas"] });
     }
 }
 

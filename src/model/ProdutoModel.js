@@ -2,24 +2,28 @@ import { DataTypes } from "sequelize";
 import { database } from "../database/database.js";
 import { config } from "dotenv";
 
-config()
-export const Area = database.define("Area", {
-  idarea: {
+config();
+
+export const Produto = database.define("Produto", {
+  idproduto: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
-    primaryKey: true
+    primaryKey: true,
   },
-  hectares: {
+  nome: {
+    type: DataTypes.STRING(64),
+    allowNull: false,
+  },
+  precounitario: {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
-  emuso: {
-    type: DataTypes.BOOLEAN,
+  descricao: {
+    type: DataTypes.STRING(128),
     allowNull: false,
-    defaultValue: false
   },
 }, {
-  tableName: "area",
+  tableName: "produto",
   schema: process.env.DB_SCHEMA,
-  timestamps: false
+  timestamps: false,
 });

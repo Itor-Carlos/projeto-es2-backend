@@ -10,6 +10,6 @@ export const database = new Sequelize(process.env.DB_NAME, process.env.DB_USER, 
     ssl: {
         require: true,
         rejectUnauthorized: false,
-    },
+    }
   }
 });
