@@ -25,7 +25,7 @@ export const Pedido = database.define("Pedido", {
     hora: {
         type: DataTypes.TIME,
         allowNull: false,
-    }
+    },
 }, {
     tableName: "pedido",
     schema: process.env.DB_SCHEMA,
