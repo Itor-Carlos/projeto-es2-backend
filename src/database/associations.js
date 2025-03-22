@@ -7,6 +7,9 @@ import { Fertilizante } from "../model/FertilizanteModel.js";
 import { Tarefa } from "../model/TarefaModel.js";
 import { Area } from "../model/AreaModel.js";
 import { Fornecedor } from "../model/FornecedorModel.js";
+import { Item } from "../model/ItemModel.js";
+import { Pedido } from "../model/PedidoModel.js";
+import { Produto } from "../model/ProdutoModel.js";
 
 Cliente.belongsTo(Endereco, { foreignKey: "idendereco", as: "endereco", onDelete: "CASCADE" });
 Funcionario.belongsTo(Endereco, { foreignKey: "idendereco", as: "endereco", onDelete: "CASCADE" });
@@ -20,5 +23,6 @@ Tarefa.belongsToMany(Funcionario, { through: "Funcionario_Tarefa", foreignKey: "
 Area.belongsToMany(Safra, { through: "Area_has_Safra", foreignKey: "idarea", as: "safras" });
 Safra.belongsToMany(Area, { through: "Area_has_Safra", foreignKey: "idsafra", as: "areas" });
 
-
+Item.belongsTo(Pedido, { foreignKey: "idpedido", as: "pedido", onDelete: "CASCADE" });
+Item.belongsTo(Produto, { foreignKey: "idproduto", as: "produto", onDelete: "CASCADE" });
 

@@ -6,7 +6,7 @@ export class BaseService {
       this.idField = idField;
       this.validateEmailAndDoc = options.validateEmailAndDoc || false;
       this.includes = options.includes || [];
-  }
+   }
 
   async findById(id) {
     const resultId = await this.Model.findByPk(id, { include: this.includes });
