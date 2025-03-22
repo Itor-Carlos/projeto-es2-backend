@@ -7,6 +7,7 @@ import { database } from './database.js';
 import ClienteController from './src/controller/ClienteController.js';
 import clienteRoutes from './src/routes/clienteRoutes.js';
 import areaRoutes from './src/routes/areaRoutes.js';
+import cargoRoutes from './src/routes/cargoRoutes.js';
 import graoRoutes from './src/routes/graoRoutes.js';
 import fertilizanteRoutes from './src/routes/fertilizanteRoutes.js';
 import funcionarioRoutes from './src/routes/funcionarioRoutes.js';
@@ -25,6 +26,7 @@ app.use('/fertilizantes', fertilizanteRoutes)
 app.use('/funcionarios', funcionarioRoutes)
 app.use('/fornecedores', fornecedorRoutes)
 app.use('/safras', safraRoutes)
+app.use('/cargos', cargoRoutes)
 
 
 const PORT = process.env.PORT_APP || 3306;
