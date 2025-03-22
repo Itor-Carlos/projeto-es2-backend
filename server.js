@@ -12,6 +12,7 @@ import funcionarioRoutes from './src/routes/funcionarioRoutes.js';
 import fornecedorRoutes from './src/routes/fornecedorRoutes.js';
 import tarefaRoutes from './src/routes/tarefaRoutes.js';
 import safraRoutes from './src/routes/safraRoutes.js';
+import pedidoRoutes from './src/routes/pedidoRoutes.js';
 import produtoRoutes from './src/routes/produtoRoutes.js';
 import './src/database/associations.js';
 
@@ -28,8 +29,8 @@ app.use('/funcionarios', funcionarioRoutes)
 app.use('/fornecedores', fornecedorRoutes)
 app.use('/tarefas', tarefaRoutes)
 app.use('/safras', safraRoutes)
+app.use('/pedidos', pedidoRoutes)
 app.use('/produtos', produtoRoutes)
-
 
 
 const PORT = process.env.PORT_APP || 3306;
@@ -46,5 +47,5 @@ const syncDB = async () => {
 
 app.listen(PORT, async () => {
     syncDB();
-    console.log("Servidor iniciaalizado na em http://localhost:" + PORT);
+    console.log("Servidor inicializado na em http://localhost:" + PORT);
 });

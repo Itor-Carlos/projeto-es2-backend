@@ -1,4 +1,4 @@
-import express, {Router} from 'express';
+import { Router } from 'express';
 import SafraController from '../controller/SafraController.js';
 
 export const routerSafra = Router();

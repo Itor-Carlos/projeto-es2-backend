@@ -1,4 +1,4 @@
-import express, {Router} from 'express';
+import { Router } from 'express';
 import FornecedorController from '../controller/FornecedorController.js';
 
 export const routerFornecedor = Router();
