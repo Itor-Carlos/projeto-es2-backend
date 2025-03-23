@@ -1,4 +1,4 @@
-import express, {Router} from 'express';
+import { Router } from 'express';
 import AreaController from '../controller/AreaController.js';
 
 export const routerArea = Router();

@@ -7,5 +7,6 @@ routerFuncionario.post('/', FuncionarioController.create);
 routerFuncionario.get('/', FuncionarioController.findAll);
 routerFuncionario.get('/:id', FuncionarioController.findById);
 routerFuncionario.delete('/:id', FuncionarioController.delete);
+routerFuncionario.put('/:id', FuncionarioController.update); 
 
 export default routerFuncionario;

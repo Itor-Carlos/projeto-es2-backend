@@ -1,10 +1,10 @@
 import PessoaBaseController from "./PessoaBaseController.js";
 import ClienteService from "../service/ClienteService.js";
-import ClienteEnderecoService from "../service/ClienteEnderecoService.js";
+import EnderecoService from "../service/EnderecoService.js";
 
 class ClienteController extends PessoaBaseController {
     constructor() {
-        super(ClienteService, "cliente", ClienteEnderecoService, "idcliente");
+        super(ClienteService, "cliente", EnderecoService, "idcliente");
     }
 }
 

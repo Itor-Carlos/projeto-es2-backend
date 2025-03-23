@@ -1,4 +1,4 @@
-import { Endereco } from "../model/EnderecoModel";
+import { Endereco } from "../model/EnderecoModel.js";
 import { BaseService } from "./BaseService.js";
 
 

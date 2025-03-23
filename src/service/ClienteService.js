@@ -4,7 +4,7 @@ import { BaseService } from "./BaseService.js";
 
 class ClienteService extends BaseService {
     constructor() {
-        super(Cliente, 'idcliente', { validateEmailAndDoc: true });
+        super(Cliente, 'idcliente', { validateEmailAndDoc: true, includes: ["endereco"] },);
     }
 }
 

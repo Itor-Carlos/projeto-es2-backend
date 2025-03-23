@@ -4,7 +4,7 @@ import { BaseService } from "./BaseService.js";
 
 class SafraService extends BaseService {
     constructor() {
-        super(Safra, 'idsafra', { validateEmailAndDoc: false });
+        super(Safra, 'idsafra', { validateEmailAndDoc: false, includes: ["grao"] });
     }
 }
 

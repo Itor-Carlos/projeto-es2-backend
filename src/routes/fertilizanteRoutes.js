@@ -1,4 +1,4 @@
-import express, {Router} from 'express';
+import { Router } from 'express';
 import FertilizanteController from '../controller/FertilizanteController.js';
 
 export const routerFertilizante = Router();
