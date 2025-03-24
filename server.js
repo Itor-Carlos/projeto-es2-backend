@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import { database } from './src/database/database.js';
 import clienteRoutes from './src/routes/clienteRoutes.js';
 import areaRoutes from './src/routes/areaRoutes.js';
+import cargoRoutes from './src/routes/cargoRoutes.js';
 import graoRoutes from './src/routes/graoRoutes.js';
 import fertilizanteRoutes from './src/routes/fertilizanteRoutes.js';
 import funcionarioRoutes from './src/routes/funcionarioRoutes.js';
@@ -31,6 +32,7 @@ app.use('/tarefas', tarefaRoutes)
 app.use('/safras', safraRoutes)
 app.use('/itens', itemRoutes)
 app.use('/produtos', produtoRoutes)
+app.use('/cargos', cargoRoutes)
 
 
 const PORT = process.env.PORT_APP || 3306;
