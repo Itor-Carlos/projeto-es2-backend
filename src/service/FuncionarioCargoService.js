@@ -8,6 +8,15 @@ class FuncionarioCargoService extends BaseService {
         super(FuncionarioCargo);
     }
 
+    findById = async (idcargo, idfuncionario) => {
+        const funcionarioCargoAlredyExists =  await FuncionarioCargo.findOne({
+            where: {
+                idcargo: idcargo,
+                idfuncionario: idfuncionario
+            }
+        });
+        return funcionarioCargoAlredyExists;
+    }
 }
 
 export default new FuncionarioCargoService();

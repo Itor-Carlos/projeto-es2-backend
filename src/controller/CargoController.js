@@ -10,8 +10,8 @@ class CargoController extends BaseController {
     async alocarCargo(request, response) {
         try {
             const { idcargo, idfuncionario } = request.body;
-            
-            const cargoAlreadyAllocated = await FuncionarioCargoService.findById(idfuncionario, idcargo);
+            const cargoAlreadyAllocated = await FuncionarioCargoService.findById(idcargo, idfuncionario);
+
             if (cargoAlreadyAllocated) {
                 return response.status(400).send({ message: "Funcionário já possui esse cargo" });
             }
