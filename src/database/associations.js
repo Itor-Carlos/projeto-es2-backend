@@ -23,6 +23,28 @@ Tarefa.belongsToMany(Funcionario, { through: "Funcionario_Tarefa", foreignKey: "
 Area.belongsToMany(Safra, { through: "Area_has_Safra", foreignKey: "idarea", as: "safras" });
 Safra.belongsToMany(Area, { through: "Area_has_Safra", foreignKey: "idsafra", as: "areas" });
 
-Item.belongsTo(Pedido, { foreignKey: "idpedido", as: "pedido", onDelete: "CASCADE" });
-Item.belongsTo(Produto, { foreignKey: "idproduto", as: "produto", onDelete: "CASCADE" });
+Cliente.belongsToMany(Item, { through: "Cliente_Item", foreignKey: "idcliente", as: "itens" });
 
+
+Fornecedor.belongsToMany(Item, { through: "Fornecedor_Item", foreignKey: "idfornecedor", as: "itens" });
+
+
+Pedido.belongsToMany(Cliente, {
+    through: "Cliente_Pedido",
+    as: "clientes",
+    foreignKey: "idPedido",
+});
+
+Pedido.belongsToMany(Fornecedor, {
+    through: "Fornecedor_Pedido",
+    as: "fornecedores",
+    foreignKey: "idPedido",
+});
+
+Item.belongsTo(Pedido, { foreignKey: "idpedido", as: "pedido" });
+Item.belongsTo(Produto, { foreignKey: "idproduto", as: "produto" });
+
+Item.belongsToMany(Cliente, { through: "Cliente_Item", foreignKey: "iditem", as: "clientes" });
+Item.belongsToMany(Fornecedor, { through: "Fornecedor_Item", foreignKey: "iditem", as: "fornecedores" });
+
+Pedido.hasMany(Item, { foreignKey: "idpedido", as: "itens" });

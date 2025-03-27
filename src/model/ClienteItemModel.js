@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import { database } from "../database/database.js";
 import { config } from "dotenv";
+import { Cliente } from "./ClienteModel.js";
 
 config();
 
