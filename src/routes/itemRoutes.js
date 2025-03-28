@@ -5,7 +5,7 @@ export const routerItem = Router();
 
 routerItem.post('/', ItemController.create);
 routerItem.get('/', ItemController.findAll);
-routerItem.get('/:id', ItemController.findById);
+routerItem.get('/:id', ItemController.findAll);
 routerItem.delete('/:id', ItemController.delete);
 routerItem.put('/:id', ItemController.update);
 
