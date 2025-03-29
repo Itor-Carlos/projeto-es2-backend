@@ -6,13 +6,15 @@ import ClienteService from "../service/ClienteService.js";
 import FornecedorService from "../service/FornecedorService.js";
 import ClienteItemService from "../service/ClienteItemService.js";
 import FornecedorItemService from "../service/FornecedorItemService.js";
-import { response } from "express";
+import { request, response } from "express";
 import { Cliente } from "../model/ClienteModel.js";
 import { Item } from "../model/ItemModel.js";
 import { Produto } from "../model/ProdutoModel.js";
 import { Pedido } from "../model/PedidoModel.js";
 import { Fornecedor } from "../model/FornecedorModel.js";
 import { where } from "sequelize";
+import { ClienteItem } from "../model/ClienteItemModel.js";
+import { FornecedorItem } from "../model/FornecedorItemModel.js";
 
 class ItemController extends BaseController {
     constructor() {
@@ -21,36 +23,14 @@ class ItemController extends BaseController {
 
     findAll = async (request, response) => {
         try {
-            const pedidos = await PedidoService.findAll({
-                include: [
-                    {
-                        model: Item,
-                        as: "itens",
-                        include: [
-                            {
-                                model: Cliente,
-                                as: "clientes",
-                            },
-                            {
-                                model: Produto,
-                                as: "produto",
-                            }
-                        ]
-                    },
-                    {
-                        model: Cliente,
-                        as: "clientes"
-                    },
-                    {
-                        model: Fornecedor,
-                        as: "fornecedores"
-                    }
-                ]
-            });
-    
-            return response.status(200).json({ 
-                pedidos, 
-                total: pedidos.length 
+            const { entity } = request.query;
+
+            const {id} = request.params
+
+            const pedidos = await PedidoService.findAll(id,entity);
+            return response.status(200).json({
+                rows: pedidos,
+                count: pedidos.length
             });
     
         } catch (err) {
@@ -63,13 +43,10 @@ class ItemController extends BaseController {
         try {
             const { pedido, produto, item, idcliente, idfornecedor } = request.body;
 
-            console.log(pedido, produto, item, idcliente, idfornecedor);
-
             const newpPedido = await PedidoService.create(pedido);
-            const newProduto = await ProdutoService.create(produto);
 
             item.idpedido = newpPedido.idpedido;
-            item.idproduto = newProduto.idproduto;
+            item.idproduto = produto.idproduto;
 
             const newItem = await ItemService.create(item);
 
@@ -137,11 +114,20 @@ class ItemController extends BaseController {
                         message: `Item com id ${id} não encontrado.`
                     });
                 }
-                await ProdutoService.update(existingProduto.idproduto, produto);
+                await ProdutoService.update(existingProduto.idproduto, {precounitario: produto.precounitario});
+                await ItemService.update(item.iditem, { idproduto: existingProduto.idproduto });
             }
 
             if (item) {
-                await ItemService.update(id, item);
+                await ItemService.update(item.iditem, item);
+            }
+
+            if(idcliente){
+                await ClienteItem.update({ idcliente }, { where: { iditem: item.iditem } });
+            }
+
+            if(idfornecedor){
+                await FornecedorItem.update({ idfornecedor }, { where: { iditem: item.iditem } });
             }
 
             return response.status(200).json({
@@ -149,6 +135,27 @@ class ItemController extends BaseController {
             });
         } catch (err) {
             console.error("Error updating item:", err);
+            return response.status(500).json({ error: "Internal server error" });
+        }
+    }
+
+    delete = (request, response) => {
+        try {
+            const { id } = request.params;
+
+            if (!id) {
+                return response.status(400).json({
+                    message: `O id do item é obrigatório.`
+                });
+            }
+
+            PedidoService.delete(id);
+
+            return response.status(200).json({
+                message: "Item deletado com sucesso"
+            });
+        } catch (err) {
+            console.error("Error deleting item:", err);
             return response.status(500).json({ error: "Internal server error" });
         }
     }
