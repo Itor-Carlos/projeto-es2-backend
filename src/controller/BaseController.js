@@ -29,7 +29,6 @@ class BaseController {
     
     create = async (request, response) => {
         try {
-            console.log(request.body);
             const data = request.body;
             const created = await this.service.create(data);
             return response.status(201).json(created);

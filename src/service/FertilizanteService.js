@@ -4,7 +4,7 @@ import { BaseService } from "./BaseService.js";
 
 class FertilizanteService extends BaseService {
     constructor() {
-        super(Fertilizante, 'idfertilizante', { validateEmailAndDoc: false });
+        super(Fertilizante, 'idfertilizante', { validateEmailAndDoc: false, includes: ["produto"] });
     }
 }
 

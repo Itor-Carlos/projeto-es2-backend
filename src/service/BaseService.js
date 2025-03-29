@@ -34,31 +34,31 @@ export class BaseService {
   }
 
   async create(data) {
-      validateCreate(this.Model, data);
+        validateCreate(this.Model, data);
+        
+        if (this.validateEmailAndDoc) {
+            const validEmail = validateEmail(data.email);
+            if(!validEmail) {
+                throw new Error("Email inválido.");
+            }
 
-      if (this.validateEmailAndDoc) {
-          const validEmail = validateEmail(data.email);
-          if(!validEmail) {
-              throw new Error("Email inválido.");
-          }
+            const validDocumento = validateDocumento(data.documento);
+            if(!validDocumento) {
+                throw new Error("Documento inválido.");
+            }
 
-          const validDocumento = validateDocumento(data.documento);
-          if(!validDocumento) {
-              throw new Error("Documento inválido.");
-          }
+            const emailAlredyUsed = await this.Model.findOne({ where: { email: data.email } });
+            if(emailAlredyUsed) {
+                throw new Error("Email já cadastrado.");
+            }  
 
-          const emailAlredyUsed = await this.Model.findOne({ where: { email: data.email } });
-          if(emailAlredyUsed) {
-              throw new Error("Email já cadastrado.");
-          }  
+            const documentoAlredyUsed = await this.Model.findOne({ where: { documento: data.documento } });
+            if(documentoAlredyUsed) {
+                throw new Error("Documento já cadastrado.");
+            }
+        }
 
-          const documentoAlredyUsed = await this.Model.findOne({ where: { documento: data.documento } });
-          if(documentoAlredyUsed) {
-              throw new Error("Documento já cadastrado.");
-          }
-      }
-
-      return await this.Model.create(data);
+        return await this.Model.create(data);
   }
 
   async update(id, data) {
