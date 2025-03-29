@@ -148,7 +148,12 @@ class ItemController extends BaseController {
                     message: `O id do item é obrigatório.`
                 });
             }
-            return response.status(200).json(PedidoService.delete(id));
+
+            PedidoService.delete(id);
+
+            return response.status(200).json({
+                message: "Item deletado com sucesso"
+            });
         } catch (err) {
             console.error("Error deleting item:", err);
             return response.status(500).json({ error: "Internal server error" });
