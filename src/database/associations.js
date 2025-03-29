@@ -25,6 +25,8 @@ Safra.belongsToMany(Area, { through: "Area_has_Safra", foreignKey: "idsafra", as
 
 Cliente.belongsToMany(Item, { through: "Cliente_Item", foreignKey: "idcliente", as: "itens" });
 
+Grao.belongsTo(Produto, { foreignKey: "idproduto", as: "produto", onDelete: "CASCADE" });
+Fertilizante.belongsTo(Produto, { foreignKey: "idproduto", as: "produto", onDelete: "CASCADE" });
 
 Fornecedor.belongsToMany(Item, { through: "Fornecedor_Item", foreignKey: "idfornecedor", as: "itens" });
 
